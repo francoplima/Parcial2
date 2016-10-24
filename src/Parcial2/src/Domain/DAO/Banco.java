@@ -8,12 +8,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public abstract class Banco {
-    protected Connection conexao;
-    protected Statement statement;
-    protected PreparedStatement prepStatement;
-    protected ResultSet resultSet;
+    protected static Connection conexao;
+    protected static Statement statement;
+    protected static PreparedStatement prepStatement;
+    protected static ResultSet resultSet;
     
-    protected boolean conectar() {
+    protected static boolean conectar() {
         try {
             Class.forName("org.sqlite.JDBC");
             // Deve ser alterado quando o banco versão final estiver pronto
@@ -26,7 +26,7 @@ public abstract class Banco {
         }
         return false;
     }
-    protected boolean desconectar() {
+    protected static boolean desconectar() {
         try {
             conexao.close();
             return true;
@@ -35,7 +35,7 @@ public abstract class Banco {
             return false;
         }
     }
-    protected boolean delete(String sql) {
+    protected static boolean delete(String sql) {
         conectar();
         boolean result = false;
         try {
@@ -46,7 +46,7 @@ public abstract class Banco {
         desconectar();
         return result;
     }
-    protected ResultSet exec(String sql) {
+    protected static ResultSet exec(String sql) {
         try {
             conexao.setAutoCommit(true);
             return statement.executeQuery(sql);
@@ -54,5 +54,18 @@ public abstract class Banco {
             e.printStackTrace();
         }
         return null;
+    }
+    protected static boolean save(String sql) {
+        conectar();
+        boolean result = false;
+        try {
+            result = statement.execute(sql);
+        } catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            desconectar();
+            return result;
+        }
+        
     }
 }
