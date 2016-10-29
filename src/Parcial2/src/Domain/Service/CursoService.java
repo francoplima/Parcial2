@@ -19,10 +19,18 @@ public abstract class CursoService {
         return CursoDAO.getAllDisciplinasByCurso(curso.getId());
     }
     
-    public static boolean addDisciplina(Disciplina disciplina) {
-        if (disciplina == null || disciplina.getId() < 0) {
+    public static boolean addDisciplina(Curso curso, Disciplina disciplina) {
+        if (disciplina == null || disciplina.getId() < 0 || curso == null || curso.getId() < 0) {
             return false;
         }
-        return false;
+        
+        return CursoDAO.addDisciplina(curso.getId(), disciplina);
+    }
+    
+    public static boolean remDisciplina(Curso curso, Disciplina disciplina) {
+        if (disciplina == null || disciplina.getId() < 0 || curso == null || curso.getId() < 0) {
+            return false;
+        }
+        return CursoDAO.remDisciplina(curso.getId(), disciplina);
     }
 }

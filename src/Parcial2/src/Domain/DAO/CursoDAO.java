@@ -64,7 +64,14 @@ public abstract class CursoDAO extends Banco {
     }
     
     public static boolean addDisciplina(int idCurso, Disciplina disciplina) {
-        
+        final String sql = "insert into CursoDisciplina(idCurso, idDisciplina) "
+                         + "values(" + idCurso + "" + disciplina.getId() + ");";
+        return save(sql);
+    }
+    
+    public static boolean remDisciplina(int idCurso, Disciplina disciplina) {
+        final String sql = "delete from CursoDisciplina where idCurso = " + idCurso + " and idDisciplina = " + disciplina.getId();
+        return delete(sql);
     }
     
     public static ArrayList<Curso> getAll() {

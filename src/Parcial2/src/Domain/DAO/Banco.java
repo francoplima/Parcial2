@@ -35,7 +35,14 @@ public abstract class Banco {
             return false;
         }
     }
+    
+    /**
+     * O método delete deve ser usado para deletar dados do banco.
+     */
     protected static boolean delete(String sql) {
+        if (!sql.contains("delete")) {
+            return false;
+        }
         conectar();
         boolean result = false;
         try {
@@ -55,7 +62,14 @@ public abstract class Banco {
         }
         return null;
     }
+    
+    /**
+     * O método save deve ser usado para inserir instruções no banco.
+     */
     protected static boolean save(String sql) {
+        if (!sql.contains("insert")) {
+            return false;
+        }
         conectar();
         boolean result = false;
         try {
