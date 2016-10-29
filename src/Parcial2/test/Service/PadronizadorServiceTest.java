@@ -1,5 +1,6 @@
 package Service;
 
+import java.text.ParseException;
 import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -37,7 +38,7 @@ public class PadronizadorServiceTest {
      * Test of dataPadrao method, of class PadronizadorService.
      */
     @Test
-    public void testDataPadrao() {
+    public void testDataPadrao() throws ParseException {
         System.out.println("dataPadrao");
         int dia = 10;
         int mes = 13;

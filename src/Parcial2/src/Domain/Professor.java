@@ -19,4 +19,8 @@ public class Professor extends Pessoa {
     public Professor(String nome, Date dataNascimento, String endereco, String cpf) {
         super(nome, dataNascimento, endereco, cpf);
     }
+    public Professor(int id, String nome, Date dataNascimento, String endereco, String cpf) {
+        super(nome, dataNascimento, endereco, cpf);
+        matricula = new Matricula(id);
+    }
 }

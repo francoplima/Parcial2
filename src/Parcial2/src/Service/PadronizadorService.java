@@ -24,16 +24,13 @@ public abstract class PadronizadorService {
         if (dia <= 0 || dia > 31 || mes <= 0 || mes > 12 || ano <= c.getTime().getYear()-200) {
             return null;
         }
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        String d = dia+"-"+mes+"-"+ano;
-        
-        Date data;
-        data = format.parse(d);
-        return data;
+        Calendar cal = Calendar.getInstance();
+        cal.set(ano, mes, dia);
+        return cal.getTime();
     }
     
     public static void main(String[] args) throws ParseException {
         Date a = PadronizadorService.dataPadrao(10, 06, 1996);
-        System.out.println(a); 
+        System.out.println(a.getDate() + " " + a.getMonth() + " " + a.getYear()); 
     }
 }

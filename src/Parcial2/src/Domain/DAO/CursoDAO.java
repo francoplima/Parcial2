@@ -1,8 +1,12 @@
 package Domain.DAO;
 
 import Domain.Curso;
+import Domain.Disciplina;
+import Domain.Professor;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,6 +31,40 @@ public abstract class CursoDAO extends Banco {
             Logger.getLogger(CursoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    /**
+     * Este método retorna um ArrayList<'Disciplina>' as colunas id, nome das disciplinas e professor.
+     */
+    public static ArrayList<Disciplina> getAllDisciplinasByCurso(int idCurso) {
+        final String sql = "select d.id, d.nome d.idProfessor fom Disciplina d join CursoDisciplina cd on d.id=cd.idDisciplina "+
+                           "where cd.idCurso = " + idCurso;
+        ArrayList<Disciplina> disciplinas = new ArrayList<>();
+        resultSet = exec(sql);
+        try {
+            while(resultSet.next()) {
+                int id = Integer.parseInt(resultSet.getObject(1).toString());
+                String nome = resultSet.getObject(2).toString();
+                String sql2 = "select p.id, p. nome, p.dataNascimento, p.endereco, p.cpf "
+                            + "from DisciplinaProfessor df join Professor p on p.id=df.idProfessor  "
+                            + "where df.idDisciplina = " + resultSet.getString(1);
+                ResultSet resultSetP = exec(sql);
+                int idP = Integer.parseInt(resultSetP.getString(1).toString());
+                String nomeP = resultSetP.getString(2).toString();
+                Date dataP = new Date(resultSetP.getObject(3).toString());
+                String enderecoP = resultSetP.getObject(4).toString();
+                String cpf = resultSetP.getObject(5).toString();
+                Professor professor =  new Professor(id, nomeP, dataP, enderecoP, cpf);
+                disciplinas.add(new Disciplina(id, nome, professor));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return disciplinas;
+    }
+    
+    public static boolean addDisciplina(int idCurso, Disciplina disciplina) {
+        
     }
     
     public static ArrayList<Curso> getAll() {
