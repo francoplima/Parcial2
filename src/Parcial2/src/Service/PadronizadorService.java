@@ -24,7 +24,6 @@ public abstract class PadronizadorService {
         if (dia <= 0 || dia > 31 || mes <= 0 || mes > 12 || ano <= c.getTime().getYear()-200) {
             return null;
         }
-        c.set(ano, mes, dia);
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         String d = dia+"-"+mes+"-"+ano;
         
@@ -35,6 +34,6 @@ public abstract class PadronizadorService {
     
     public static void main(String[] args) throws ParseException {
         Date a = PadronizadorService.dataPadrao(10, 06, 1996);
-        System.out.println(a.getDay() + "-" + a.getMonth() + "-" + a.getYear()); 
+        System.out.println(a); 
     }
 }

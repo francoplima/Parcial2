@@ -1,5 +1,6 @@
 package Domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,8 +14,9 @@ public class Matricula {
     private List<Disciplina> disciplinas;
     private Date dataMatricula;
     
-    public Matricula() {
-        
+    public Matricula(Date dataMatricula) {
+        disciplinas = new ArrayList<>();
+        this.dataMatricula = dataMatricula;
     }
 
     public int getId() {
