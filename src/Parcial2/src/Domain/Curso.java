@@ -1,15 +1,14 @@
 package Domain;
 
 //import Geral.Disciplina;
-import Domain.Disciplina;
 import Domain.Service.CursoService;
-import java.util.List;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class Curso {
     private int id;
     private String nome;
-    private List<Disciplina> disciplinas;
+    private ArrayList<Disciplina> disciplinas;
     private int numeroPeriodos;
     private String titulacao;
     
@@ -42,7 +41,7 @@ public class Curso {
         this.nome = nome;
     }
 
-    public List<Disciplina> getDisciplinas() {
+    public ArrayList<Disciplina> getDisciplinas() {
         return disciplinas;
     }
     

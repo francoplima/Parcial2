@@ -1,12 +1,13 @@
 package Domain.DAO;
 
 import Domain.Curso;
+
 import Domain.Disciplina;
 import Domain.Professor;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -74,9 +75,9 @@ public abstract class CursoDAO extends Banco {
         return delete(sql);
     }
     
+    
     public static ArrayList<Curso> getAll() {
         // id, nome, disciplinas, numeroPeriodos, titulacao
-        conectar();
         final String sql = "select c.id, c.nome, c.numeroDePeriodos, c.titulacao from curso c";
         ArrayList<Curso> cursos = new ArrayList<>();
         
@@ -93,11 +94,9 @@ public abstract class CursoDAO extends Banco {
         } catch (SQLException ex) {
             Logger.getLogger(Curso.class.getName()).log(Level.SEVERE, null, ex);
         }
-        desconectar();
         return cursos;
     }
     public static Curso findById(int id) {
-        conectar();
         // id, nome, periodos, titulacao
         final String sql = "select c.codCurso, c.nome, c.numeroDePeriodos, c.titulacao from curso c where c.id = " + id;
         Curso curso = null;
@@ -115,11 +114,9 @@ public abstract class CursoDAO extends Banco {
                 e.printStackTrace();
             }
         }
-        desconectar();
         return curso;
     }
     public static ArrayList<Curso> findByName(String name) {
-        conectar();
         final String sql = "select c.codCurso, c.nome, c.numeroDePeriodos, c.titulacao "
                          + "from curso c where c.nome = " + name;
         ArrayList<Curso> cursos = new ArrayList<>();
@@ -137,7 +134,6 @@ public abstract class CursoDAO extends Banco {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        desconectar();
         return cursos;
     }
     public static boolean delete(Curso curso) {

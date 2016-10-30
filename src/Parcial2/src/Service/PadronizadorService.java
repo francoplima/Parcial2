@@ -1,7 +1,6 @@
 package Service;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -31,6 +30,7 @@ public abstract class PadronizadorService {
     
     public static void main(String[] args) throws ParseException {
         Date a = PadronizadorService.dataPadrao(10, 06, 1996);
-        System.out.println(a.getDate() + " " + a.getMonth() + " " + a.getYear()); 
+        System.out.println(a.getDate() + " " + a.getMonth() + " " + a.getYear());
+        System.out.println(a);
     }
 }

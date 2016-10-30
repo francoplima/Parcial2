@@ -23,4 +23,5 @@ public class Professor extends Pessoa {
         super(nome, dataNascimento, endereco, cpf);
         matricula = new Matricula(id);
     }
+    
 }

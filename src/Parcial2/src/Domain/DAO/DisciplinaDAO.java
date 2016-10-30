@@ -59,7 +59,8 @@ public abstract class DisciplinaDAO extends Banco {
             }
         } catch (SQLException e) {
                 e.printStackTrace();
-            }
+        }
+        return null;
     }
     
     public static boolean addTurma() {

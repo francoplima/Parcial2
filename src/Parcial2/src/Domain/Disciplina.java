@@ -1,5 +1,6 @@
 package Domain;
 
+
 import java.util.ArrayList;
 /**
  *
@@ -59,6 +60,5 @@ public class Disciplina {
     public void setTurmas(ArrayList<Turma> turmas) {
         this.turmas.addAll(turmas);
     }
-    
     
 }
