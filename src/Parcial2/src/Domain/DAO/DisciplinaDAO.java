@@ -51,14 +51,15 @@ public abstract class DisciplinaDAO extends Banco {
         ArrayList<Aluno> alunos = new ArrayList<>();
         resultSet = exec(sql);
         
-        while (resultSet.next()) {
-            try {
+        try {
+            while (resultSet.next()) {
                 int idTurma = Integer.parseInt(resultSet.getObject(1).toString());
                 final String sql2 =  "select ";
-            } catch (SQLException e) {
+            
+            }
+        } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
     }
     
     public static boolean addTurma() {
@@ -66,6 +67,6 @@ public abstract class DisciplinaDAO extends Banco {
     }
     
     public static boolean remTurma() {
-        
+        return false;
     }
 }
