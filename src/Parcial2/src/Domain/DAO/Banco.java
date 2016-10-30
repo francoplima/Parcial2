@@ -75,16 +75,11 @@ public abstract class Banco {
         if (!sql.contains("insert")) {
             return false;
         }
-        conectar();
-        boolean result = false;
         try {
-            result = statement.execute(sql);
+            return statement.execute(sql);
         } catch(SQLException e) {
             e.printStackTrace();
-        } finally {
-            desconectar();
-            return result;
         }
-        
+        return false;        
     }
 }

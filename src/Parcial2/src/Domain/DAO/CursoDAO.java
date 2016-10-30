@@ -151,11 +151,14 @@ public abstract class CursoDAO extends Banco {
     }
     
     public static boolean save(Curso curso) {
+        conectar();
+        boolean result = false;
         if(curso != null) {
-            final String sql = "insert into Curso(nome, numeroPeriodos, titulacao) " +
-                           " values(" + curso.getNome()+","+curso.getNumeroPeriodos()+","+curso.getTitulacao()+")";
-            return save(sql);
+            final String sql = "insert into Curso(nome, numeroDePeriodos, titulacao) " +
+                               " values('" + curso.getNome()+"',"+curso.getNumeroPeriodos()+",'"+curso.getTitulacao()+"')";
+            result = save(sql);
         }
-        return false;
+        desconectar();
+        return result;
     }
 }

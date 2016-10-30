@@ -12,6 +12,10 @@ import javax.swing.JOptionPane;
  */
 public abstract class CursoService {
     
+    public static ArrayList<Curso> getAll() {
+        return CursoDAO.getAll();
+    }
+    
     public static ArrayList<Disciplina> getDisciplinas(Curso curso) {
         if (curso == null || curso.getId() < 0) {
             JOptionPane.showMessageDialog(null, "Curso inválido", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -32,6 +36,13 @@ public abstract class CursoService {
             return false;
         }
         return CursoDAO.remDisciplina(curso.getId(), disciplina);
+    }
+    
+    public static boolean save(Curso curso) {
+        if (curso != null) {
+            CursoDAO.save(curso);
+        }
+        return false;
     }
     
     public static boolean ExistCurso() {
