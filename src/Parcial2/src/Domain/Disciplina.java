@@ -13,6 +13,9 @@ public class Disciplina {
     private Professor professor;
     private ArrayList<Turma> turmas;
     
+    public static final int COLUNAS = 3;
+    public static final String[] NOME_COLUNA = {"id", "nome", "professor"};
+    
     public Disciplina(int id, String nome, Professor professor) {
         this.id = id;
         this.nome = nome;

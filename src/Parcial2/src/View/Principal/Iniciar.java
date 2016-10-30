@@ -4,6 +4,7 @@ import Domain.*;
 import Domain.Service.CursoService;
 import View.Funcionario.Cadastrar.CadastrarCurso;
 import View.Funcionario.Listar.ListarCurso;
+import View.Funcionario.Listar.ListarDisciplinasByCurso;
 import java.util.ArrayList;
 
 public class Iniciar extends javax.swing.JFrame {
@@ -24,6 +25,7 @@ public class Iniciar extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         verCursos = new javax.swing.JMenuItem();
         CadastrarCursos = new javax.swing.JMenuItem();
+        disciplinasPorCurso = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,6 +80,14 @@ public class Iniciar extends javax.swing.JFrame {
         });
         jMenu4.add(CadastrarCursos);
 
+        disciplinasPorCurso.setText("Disciplinas por Curso");
+        disciplinasPorCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disciplinasPorCursoActionPerformed(evt);
+            }
+        });
+        jMenu4.add(disciplinasPorCurso);
+
         jMenu3.add(jMenu4);
 
         jMenu1.add(jMenu3);
@@ -119,6 +129,12 @@ public class Iniciar extends javax.swing.JFrame {
         this.setContentPane(new ListarCurso(CursoService.getAll()));
     }//GEN-LAST:event_verCursosActionPerformed
 
+    private void disciplinasPorCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disciplinasPorCursoActionPerformed
+        // TODO add your handling code here:
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setContentPane(new ListarDisciplinasByCurso());
+    }//GEN-LAST:event_disciplinasPorCursoActionPerformed
+
     public static void addCursos(ArrayList<Curso> cursos) {
         if (! cursos.isEmpty()) {
             cursos.addAll(cursos);
@@ -156,6 +172,7 @@ public class Iniciar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem CadastrarCursos;
+    private javax.swing.JMenuItem disciplinasPorCurso;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

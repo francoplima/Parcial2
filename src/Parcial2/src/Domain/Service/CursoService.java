@@ -16,6 +16,10 @@ public abstract class CursoService {
         return CursoDAO.getAll();
     }
     
+    public static Curso findCursoById(int idCurso) {
+        return CursoDAO.findById(idCurso);
+    }
+    
     public static ArrayList<Disciplina> getDisciplinas(Curso curso) {
         if (curso == null || curso.getId() < 0) {
             JOptionPane.showMessageDialog(null, "Curso inválido", "Erro", JOptionPane.ERROR_MESSAGE);
