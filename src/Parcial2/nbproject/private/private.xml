@@ -3,10 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/guilh/Documents/6º%20Período/POO/Parcial2/src/Parcial2/src/Domain/Pessoa.java</file>
             <file>file:/D:/guilh/Documents/6º%20Período/POO/Parcial2/src/Parcial2/src/Domain/DAO/Banco.java</file>
             <file>file:/D:/guilh/Documents/6º%20Período/POO/Parcial2/src/Parcial2/src/Domain/DAO/CursoDAO.java</file>
-            <file>file:/D:/guilh/Documents/6º%20Período/POO/Parcial2/src/Parcial2/src/Domain/Curso.java</file>
+            <file>file:/D:/guilh/Documents/6º%20Período/POO/Parcial2/src/Parcial2/src/Domain/Disciplina.java</file>
+            <file>file:/D:/guilh/Documents/6º%20Período/POO/Parcial2/src/Parcial2/src/Domain/Service/CursoService.java</file>
             <file>file:/D:/guilh/Documents/6º%20Período/POO/Parcial2/src/Parcial2/src/Service/PadronizadorService.java</file>
+            <file>file:/D:/guilh/Documents/6º%20Período/POO/Parcial2/src/Parcial2/src/Domain/Professor.java</file>
+            <file>file:/D:/guilh/Documents/6º%20Período/POO/Parcial2/src/Parcial2/src/Domain/Matricula.java</file>
         </group>
     </open-files>
 </project-private>

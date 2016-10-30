@@ -33,4 +33,12 @@ public abstract class CursoService {
         }
         return CursoDAO.remDisciplina(curso.getId(), disciplina);
     }
+    
+    public static boolean ExistCurso() {
+        return false;
+    }
+    
+    public static boolean ExistDisciplinaInCurso() {
+        return false;
+    }
 }
