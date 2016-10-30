@@ -1,7 +1,6 @@
 package Domain;
 
-import java.util.List;
-
+import java.util.ArrayList;
 /**
  *
  * @author guilh
@@ -11,11 +10,22 @@ public class Disciplina {
     private int id;
     private String nome;
     private Professor professor;
-    private List<Turma> turmas;
+    private ArrayList<Turma> turmas;
     
     public Disciplina(int id, String nome, Professor professor) {
         this.id = id;
         this.nome = nome;
+        turmas = new ArrayList<>();
+    }
+
+    public void addTurma(Turma turma) {
+        if (turma == null) {
+            return;
+        }
+        turmas.add(turma);
+    }
+    public void remTurma(Turma turma) {
+        
     }
 
     public int getId() {
@@ -42,12 +52,12 @@ public class Disciplina {
         this.professor = professor;
     }
 
-    public List<Turma> getTurmas() {
+    public ArrayList<Turma> getTurmas() {
         return turmas;
     }
 
-    public void setTurmas(List<Turma> turmas) {
-        this.turmas = turmas;
+    public void setTurmas(ArrayList<Turma> turmas) {
+        this.turmas.addAll(turmas);
     }
     
     

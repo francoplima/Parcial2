@@ -2,7 +2,9 @@ package Domain;
 
 //import Geral.Disciplina;
 import Domain.Disciplina;
+import Domain.Service.CursoService;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class Curso {
     private int id;
@@ -40,13 +42,27 @@ public class Curso {
         this.nome = nome;
     }
 
-    /*public List<Disciplina> getDisciplinas() {
+    public List<Disciplina> getDisciplinas() {
         return disciplinas;
     }
-
-    public void setDisciplinas(List<Disciplina> disciplinas) {
-        this.disciplinas = disciplinas;
-    }*/
+    
+    public void remDisciplina(Disciplina disciplina) {
+        if (CursoService.remDisciplina(this, disciplina)) {
+            this.disciplinas.remove(disciplina);
+        } else {
+            JOptionPane.showMessageDialog(null, "Não foi possível remover a disciplina, tente novamente mais tarde",
+                                          "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void addDisciplinas(Disciplina disciplina) {
+        if (CursoService.remDisciplina(this, disciplina)) {
+            this.disciplinas.add(disciplina);
+        } else {
+            JOptionPane.showMessageDialog(null, "Não foi possível adicionar a disciplina, tente novamente mais tarde",
+                                          "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     public int getNumeroPeriodos() {
         return numeroPeriodos;
