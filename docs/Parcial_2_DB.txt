@@ -1,0 +1,24 @@
+-- *Banco de Dados*
+-- Parcial 1:
+-- 1. Tabelas e informações contidas
+/*Cidade: codCidade(PK), nome, população
+ 
+ *Aluno: matrícula(PK), nome, CPF(UK), endereço, dataNascimento, telefone
+
+ *Professor: codigo(PK), nome, CPF(UK), endereço, dataNascimento, telefone
+ 
+ *Curso: codCurso(PK), nome, titulação, numeroDePeríodos
+
+ *AlunoPorCurso: codAlunoPorCurso(PK), codCurso(FK), matrícula(FK)
+
+ *Disciplinas: codDisciplina(PK), nome, cargaHorária
+
+ *DisciplinasProfessor: codDisciplinasProfessor(PK), codDisciplina(FK), codProfessor(FK)
+
+ *DisciplinasCurso: codDisciplinasCurso(PK), codCurso(FK), codDisciplina(FK)
+ 
+ *Turmas: codTurma(PK), disciplinaRelacionada(FK), vagas, matriculas
+ 
+ *AlunoTurma: codAlunoTurma(PK), codAluno(FK), codTurma(FK)
+ 
+*/
