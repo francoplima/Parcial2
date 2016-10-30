@@ -63,11 +63,14 @@ public abstract class DisciplinaDAO extends Banco {
         return null;
     }
     
-    public static boolean addTurma() {
-        return false;
+    public static boolean addTurma(int idDisciplina, int idTurma) {
+        final String sql = "insert into DisciplinaTurma(idDisciplina, idTurma) "
+                         + "values(" + idDisciplina + ", " + idTurma + ")";
+        return save(sql);
     }
     
-    public static boolean remTurma() {
-        return false;
+    public static boolean remTurma(int idDisciplina, int idTurma) {
+        final String sql = "delete from DisciplinaTurma where idDisciplina = " + idDisciplina + " idTurma = " + idTurma;
+        return delete(sql);
     }
 }

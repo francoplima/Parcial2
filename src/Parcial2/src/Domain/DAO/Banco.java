@@ -53,14 +53,19 @@ public abstract class Banco {
         desconectar();
         return result;
     }
+    
+    /**
+     * Antes de executar qualquer select sql. <br>
+     * Deve-se executar o método conectar() e somente após terminar de pegar todos os dados deve-se utilizar o 
+     * método desconectar.
+     */
     protected static ResultSet exec(String sql) {
         try {
-            conexao.setAutoCommit(true);
-            return statement.executeQuery(sql);
+            resultSet = statement.executeQuery(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return resultSet;
     }
     
     /**

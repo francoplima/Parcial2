@@ -1,18 +1,15 @@
 package View.Principal;
 
-import Domain.Service.Curso;
+import Domain.*;
 import Domain.DAO.CursoDAO;
 import View.Funcionario.Listar.ListarCurso;
 import java.util.ArrayList;
 
 public class Iniciar extends javax.swing.JFrame {
     private ArrayList<Curso> cursos;
-    private CursoDAO cursoDB;
     
     public Iniciar() {
         initComponents();
-        cursoDB = new CursoDAO();
-        cursos = cursoDB.getAll();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -101,7 +98,7 @@ public class Iniciar extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         //
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setContentPane(new ListarCurso(cursos));
+        this.setContentPane(new ListarCurso(CursoDAO.getAll()));
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     public static void addCursos(ArrayList<Curso> cursos) {

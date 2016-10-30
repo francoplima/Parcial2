@@ -15,7 +15,7 @@ public abstract class CursoDAO extends Banco {
     
     public static Curso get(Curso curso) {
         // nome, disciplina, numeroPeriodo, titulacao
-        final String sql = "select c.nome, c.numeroDePeriodos, c.titulacao from curso c " +
+        final String sql = "select c.id, c.nome, c.numeroDePeriodos, c.titulacao from curso c " +
                            "where c.nome = " + curso.getNome() + "c.numeroDePeriodos = " + curso.getNumeroPeriodos() + "c.titulacao = " 
                           +curso.getTitulacao();
         resultSet = exec(sql);
@@ -77,6 +77,7 @@ public abstract class CursoDAO extends Banco {
     
     
     public static ArrayList<Curso> getAll() {
+        conectar();
         // id, nome, disciplinas, numeroPeriodos, titulacao
         final String sql = "select c.id, c.nome, c.numeroDePeriodos, c.titulacao from curso c";
         ArrayList<Curso> cursos = new ArrayList<>();
@@ -85,18 +86,20 @@ public abstract class CursoDAO extends Banco {
         
         try {
             while(resultSet.next()) {
-                int codigo = Integer.parseInt(resultSet.getObject(1).toString());
-                String nome = resultSet.getObject(2).toString();
-                int numeroPeriodos = Integer.parseInt(resultSet.getObject(3).toString());
-                String titulacao = resultSet.getObject(4).toString();
+                int codigo = resultSet.getInt(1);
+                String nome = resultSet.getString(2);
+                int numeroPeriodos = resultSet.getInt(3);
+                String titulacao = resultSet.getString(4);
                 cursos.add(new Curso(codigo, nome, numeroPeriodos, titulacao));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Curso.class.getName()).log(Level.SEVERE, null, ex);
         }
+        desconectar();
         return cursos;
     }
     public static Curso findById(int id) {
+        conectar();
         // id, nome, periodos, titulacao
         final String sql = "select c.codCurso, c.nome, c.numeroDePeriodos, c.titulacao from curso c where c.id = " + id;
         Curso curso = null;
@@ -114,9 +117,11 @@ public abstract class CursoDAO extends Banco {
                 e.printStackTrace();
             }
         }
+        desconectar();
         return curso;
     }
     public static ArrayList<Curso> findByName(String name) {
+        conectar();
         final String sql = "select c.codCurso, c.nome, c.numeroDePeriodos, c.titulacao "
                          + "from curso c where c.nome = " + name;
         ArrayList<Curso> cursos = new ArrayList<>();
@@ -134,6 +139,7 @@ public abstract class CursoDAO extends Banco {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        desconectar();
         return cursos;
     }
     public static boolean delete(Curso curso) {
