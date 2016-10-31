@@ -24,7 +24,7 @@ public abstract class CursoService {
         if (curso == null || curso.getId() < 0) {
             JOptionPane.showMessageDialog(null, "Curso inválido", "Erro", JOptionPane.ERROR_MESSAGE);
         }
-        return CursoDAO.getAllDisciplinasByCurso(curso.getId());
+        return CursoDAO.getAllDisciplinasByCurso(curso);
     }
     
     public static boolean addDisciplina(Curso curso, Disciplina disciplina) {
@@ -32,14 +32,14 @@ public abstract class CursoService {
             return false;
         }
         
-        return CursoDAO.addDisciplina(curso.getId(), disciplina);
+        return CursoDAO.addDisciplina(curso, disciplina);
     }
     
     public static boolean remDisciplina(Curso curso, Disciplina disciplina) {
         if (disciplina == null || disciplina.getId() < 0 || curso == null || curso.getId() < 0) {
             return false;
         }
-        return CursoDAO.remDisciplina(curso.getId(), disciplina);
+        return CursoDAO.remDisciplina(curso, disciplina);
     }
     
     public static boolean save(Curso curso) {

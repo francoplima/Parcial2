@@ -4,10 +4,12 @@ import Domain.Curso;
 
 import Domain.Disciplina;
 import Domain.Professor;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,18 +20,15 @@ public abstract class CursoDAO extends Banco {
         final String sql = "select c.id, c.nome, c.numeroDePeriodos, c.titulacao from curso c " +
                            "where c.nome = " + curso.getNome() + "c.numeroDePeriodos = " + curso.getNumeroPeriodos() + "c.titulacao = " 
                           +curso.getTitulacao();
-        resultSet = exec(sql);
         
         try {
             while(resultSet.next()) {
-                int codigo = Integer.parseInt(resultSet.getObject(1).toString());
-                String nome = resultSet.getObject(2).toString();
-                int numeroPeriodos = Integer.parseInt(resultSet.getObject(3).toString());
-                String titulacao = resultSet.getObject(4).toString();
-                return new Curso(codigo, nome, numeroPeriodos, titulacao);
+                int id = resultSet.getInt(1);
+                curso.setId(id);
+                return curso;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CursoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         return null;
     }
@@ -37,9 +36,9 @@ public abstract class CursoDAO extends Banco {
     /**
      * Este método retorna um ArrayList<'Disciplina>' as colunas id, nome das disciplinas e professor.
      */
-    public static ArrayList<Disciplina> getAllDisciplinasByCurso(int idCurso) {
+    public static ArrayList<Disciplina> getAllDisciplinasByCurso(Curso curso) {
         final String sql = "select d.id, d.nome d.idProfessor fom Disciplina d join CursoDisciplina cd on d.id=cd.idDisciplina "+
-                           "where cd.idCurso = " + idCurso;
+                           "where cd.idCurso = " + curso.getId();
         ArrayList<Disciplina> disciplinas = new ArrayList<>();
         resultSet = exec(sql);
         try {
@@ -50,11 +49,11 @@ public abstract class CursoDAO extends Banco {
                             + "from DisciplinaProfessor df join Professor p on p.id=df.idProfessor  "
                             + "where df.idDisciplina = " + resultSet.getString(1);
                 ResultSet resultSetP = exec(sql);
-                int idP = Integer.parseInt(resultSetP.getString(1).toString());
-                String nomeP = resultSetP.getString(2).toString();
-                Date dataP = new Date(resultSetP.getObject(3).toString());
-                String enderecoP = resultSetP.getObject(4).toString();
-                String cpf = resultSetP.getObject(5).toString();
+                int idP = resultSetP.getInt(1);
+                String nomeP = resultSetP.getString(2);
+                Date dataP = new Date(resultSetP.getString(3));
+                String enderecoP = resultSetP.getString(4);
+                String cpf = resultSetP.getString(5);
                 Professor professor =  new Professor(id, nomeP, dataP, enderecoP, cpf);
                 disciplinas.add(new Disciplina(id, nome, professor));
             }
@@ -64,14 +63,15 @@ public abstract class CursoDAO extends Banco {
         return disciplinas;
     }
     
-    public static boolean addDisciplina(int idCurso, Disciplina disciplina) {
+    public static boolean addDisciplina(Curso curso, Disciplina disciplina) {
         final String sql = "insert into CursoDisciplina(idCurso, idDisciplina) "
-                         + "values(" + idCurso + "" + disciplina.getId() + ");";
+                         + "values(" + curso.getId() + "" + disciplina.getId() + ");";
         return save(sql);
     }
     
-    public static boolean remDisciplina(int idCurso, Disciplina disciplina) {
-        final String sql = "delete from CursoDisciplina where idCurso = " + idCurso + " and idDisciplina = " + disciplina.getId();
+    public static boolean remDisciplina(Curso curso, Disciplina disciplina) {
+        final String sql = "delete from CursoDisciplina where idCurso = " + curso.getId() + " and idDisciplina = " + disciplina.getId();
+        disciplina = null;
         return delete(sql);
     }
     
@@ -145,11 +145,16 @@ public abstract class CursoDAO extends Banco {
     public static boolean delete(Curso curso) {
         if(curso != null) {
             final String sql = "delete from Curso where id = " + curso.getId();
+            curso = null;
             return delete(sql);
         }
         return false;
     }
     
+    /**
+     * Deve-se atualizar o objeto logo após salvá-lo.<br>
+     * Esta atualização utiliza o método get, pois assim será atualizada a informação de id do objeto.
+     */
     public static boolean save(Curso curso) {
         conectar();
         boolean result = false;
