@@ -23,13 +23,13 @@ public class Aluno extends Pessoa{
      * O cpf possui validação de acordo com as regras de utilização brasileiras.
      * Há uma classe para formatação chamada PadronizadorService, ela trabalhará para padronizar os dados necessários em todo projeto
      */
-    public Aluno(int codigo, String nome, Date dataNascimento, String endereco, String cpf, Curso curso) {
-        super(nome, dataNascimento, endereco, cpf);
+    public Aluno(int codigo, String nome, Date dataNascimento, String cpf, Curso curso) {
+        super(nome, dataNascimento, cpf);
         matricula.setId(codigo);
         this.curso = curso;
     }
-    public Aluno(String nome, Date dataNascimento, String endereco, String cpf, Curso curso) {
-        super(nome, dataNascimento, endereco, cpf);
+    public Aluno(String nome, Date dataNascimento, String cpf, Curso curso) {
+        super(nome, dataNascimento, cpf);
         this.curso = curso;
     }
     

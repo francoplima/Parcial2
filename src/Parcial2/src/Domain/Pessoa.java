@@ -15,13 +15,11 @@ import java.util.Date;
 public abstract class Pessoa {
     protected String nome;
     protected Date dataNascimento;
-    protected String endereco;
     protected String cpf;
     
-    public Pessoa(String nome, Date dataNascimento, String endereco, String cpf) {
+    public Pessoa(String nome, Date dataNascimento, String cpf) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
-        this.endereco = endereco;
         this.cpf = cpf;
     }
 
@@ -39,14 +37,6 @@ public abstract class Pessoa {
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
     }
 
     public String getCpf() {

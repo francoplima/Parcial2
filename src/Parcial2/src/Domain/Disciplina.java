@@ -21,6 +21,11 @@ public class Disciplina {
         this.nome = nome;
         turmas = new ArrayList<>();
     }
+    
+    public Disciplina(String nome, Professor professor) {
+        this.nome = nome;
+        turmas = new ArrayList<>();
+    }
 
     public void addTurma(Turma turma) {
         if (turma == null) {
@@ -29,7 +34,10 @@ public class Disciplina {
         turmas.add(turma);
     }
     public void remTurma(Turma turma) {
-        
+        if (turma == null) {
+            return;
+        }
+        turmas.remove(turma);
     }
 
     public int getId() {

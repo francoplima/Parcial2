@@ -25,16 +25,15 @@ public abstract class DisciplinaDAO extends Banco {
             while(resultSet.next()) {
                 int id = Integer.parseInt(resultSet.getObject(1).toString());
                 String nome = resultSet.getObject(2).toString();
-                String sql2 = "select p.id, p. nome, p.dataNascimento, p.endereco, p.cpf "
+                String sql2 = "select p.id, p. nome, p.dataNascimento, p.cpf "
                             + "from DisciplinaProfessor df join Professor p on p.id=df.idProfessor  "
                             + "where df.idDisciplina = " + resultSet.getString(1);
                 ResultSet resultSetP = exec(sql);
-                int idP = Integer.parseInt(resultSetP.getString(1).toString());
-                String nomeP = resultSetP.getString(2).toString();
-                Date dataP = new Date(resultSetP.getObject(3).toString());
-                String enderecoP = resultSetP.getObject(4).toString();
-                String cpf = resultSetP.getObject(5).toString();
-                Professor professor =  new Professor(id, nomeP, dataP, enderecoP, cpf);
+                int idP = Integer.parseInt(resultSetP.getString(1));
+                String nomeP = resultSetP.getString(2);
+                Date dataP = new Date(resultSetP.getString(3));
+                String cpf = resultSetP.getString(4);
+                Professor professor =  new Professor(id, nomeP, dataP, cpf);
                 return new Disciplina(id, nome, professor);
             }
         } catch (SQLException e) {
