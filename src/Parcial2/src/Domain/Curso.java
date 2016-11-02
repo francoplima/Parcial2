@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package Domain.Service;
 
 //import Geral.Disciplina;
@@ -12,23 +13,53 @@ public class Curso {
     
     public Curso(int codigo, String nome, int numeroPeriodos, String titulacao) {
         this.codigo = codigo;
+=======
+package Domain;
+
+//import Geral.Disciplina;
+import Domain.Disciplina;
+import java.util.List;
+
+public class Curso {
+    private int id;
+    private String nome;
+    private List<Disciplina> disciplinas;
+    private int numeroPeriodos;
+    private String titulacao;
+    
+    public Curso(int id, String nome, int numeroPeriodos, String titulacao) {
+        this.id = id;
+>>>>>>> Franco
         this.nome = nome;
         this.numeroPeriodos = numeroPeriodos;
         this.titulacao = titulacao;
     }
     public Curso(String nome, int numeroPeriodos, String titulacao) {
+<<<<<<< HEAD
         this.codigo = codigo;
+=======
+        this.id = id;
+>>>>>>> Franco
         this.nome = nome;
         this.numeroPeriodos = numeroPeriodos;
         this.titulacao = titulacao;
     }
 
+<<<<<<< HEAD
     public int getCodigo() {
         return codigo;
     }
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
+=======
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+>>>>>>> Franco
     }
 
     public String getNome() {
