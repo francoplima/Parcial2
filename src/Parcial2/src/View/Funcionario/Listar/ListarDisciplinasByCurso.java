@@ -3,14 +3,11 @@ package View.Funcionario.Listar;
 import Domain.Curso;
 import Domain.Disciplina;
 import Domain.Service.CursoService;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import javax.swing.AbstractListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -24,7 +21,16 @@ public class ListarDisciplinasByCurso extends javax.swing.JPanel {
         
         ArrayList<Curso> cursos = CursoService.getAll();
         
-        
+        cursosList.removeAll();
+        String[] ele = new String[cursos.size()];
+        for (int a = 0; a < ele.length; a++) {
+            ele[a] = cursos.get(a).getNome();
+        }
+        cursosList.setModel(new AbstractListModel<String>() {
+            String[] strings =  ele ;
+            public int getSize() { return cursos.size(); }
+            public String getElementAt(int i) { return strings[i]; }
+        });
         
         
         disciplinasList.setModel(new DefaultTableModel(Disciplina.NOME_COLUNA, 0));
@@ -32,6 +38,14 @@ public class ListarDisciplinasByCurso extends javax.swing.JPanel {
         cursosList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
+                int id = cursosList.getSelectedIndex();
+                Curso curso = cursos.get(id);
+                
+                ArrayList<Disciplina> disciplinas = CursoService.getDisciplinas(curso);
+                
+                Object[][] data = getData(disciplinas);
+                
+                disciplinasList.setModel(new DefaultTableModel(data, Disciplina.NOME_COLUNA));
             }
         });
         
@@ -77,11 +91,13 @@ public class ListarDisciplinasByCurso extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(disciplinasList);
 
+        cursosList.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cursosList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        cursosList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(cursosList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -90,9 +106,10 @@ public class ListarDisciplinasByCurso extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

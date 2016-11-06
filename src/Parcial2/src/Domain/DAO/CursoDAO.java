@@ -37,7 +37,8 @@ public abstract class CursoDAO extends Banco {
      * Este método retorna um ArrayList<'Disciplina>' as colunas id, nome das disciplinas e professor.
      */
     public static ArrayList<Disciplina> getAllDisciplinasByCurso(Curso curso) {
-        final String sql = "select d.id, d.nome fom Disciplina d where d.idCurso = " + curso.getId();
+        conectar();
+        final String sql = "select d.id, d.nome from Disciplina d where d.idCurso = " + curso.getId();
         ArrayList<Disciplina> disciplinas = new ArrayList<>();
         resultSet = exec(sql);
         try {
@@ -51,6 +52,7 @@ public abstract class CursoDAO extends Banco {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        desconectar();
         return disciplinas;
     }
     
