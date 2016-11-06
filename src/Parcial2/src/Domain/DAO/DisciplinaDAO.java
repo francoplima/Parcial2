@@ -1,14 +1,12 @@
 package Domain.DAO;
 
 import Domain.Aluno;
+import Domain.Curso;
 import static Domain.DAO.Banco.resultSet;
 import Domain.Disciplina;
-import Domain.Professor;
 import Domain.Turma;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -17,16 +15,15 @@ import java.util.Date;
 public abstract class DisciplinaDAO extends Banco {
     
     public static Disciplina findById(int idDisciplina) {
-        final String sql = "select d.id, d.nome d.idProfessor fom Disciplina d "+
-                           "where d.id = " + idDisciplina;
+        final String sql = "select d.id, d.nome, d.idCurso from Disciplina d where d.id = " + idDisciplina;
         
         resultSet = exec(sql);
         try {
             while(resultSet.next()) {
                 int id = resultSet.getInt(1);
                 String nome = resultSet.getString(2);
-                
-                return new Disciplina(id, nome);
+                Curso curso = CursoDAO.findById(resultSet.getInt(3));
+                return new Disciplina(id, nome, curso);
             }
         } catch (SQLException e) {
             e.printStackTrace();

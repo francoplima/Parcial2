@@ -3,6 +3,7 @@ package View.Principal;
 import Domain.*;
 import Domain.Service.CursoService;
 import View.Funcionario.Cadastrar.CadastrarCurso;
+import View.Funcionario.Cadastrar.CadastrarDisciplinaEmCurso;
 import View.Funcionario.Listar.ListarCurso;
 import View.Funcionario.Listar.ListarDisciplinasByCurso;
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ public class Iniciar extends javax.swing.JFrame {
         verCursos = new javax.swing.JMenuItem();
         CadastrarCursos = new javax.swing.JMenuItem();
         disciplinasPorCurso = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        gestaoDisciplinas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -90,6 +93,18 @@ public class Iniciar extends javax.swing.JFrame {
 
         jMenu3.add(jMenu4);
 
+        jMenu5.setText("Disciplinas");
+
+        gestaoDisciplinas.setText("Gestão de Disciplinas");
+        gestaoDisciplinas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gestaoDisciplinasActionPerformed(evt);
+            }
+        });
+        jMenu5.add(gestaoDisciplinas);
+
+        jMenu3.add(jMenu5);
+
         jMenu1.add(jMenu3);
 
         jMenuBar1.add(jMenu1);
@@ -135,6 +150,12 @@ public class Iniciar extends javax.swing.JFrame {
         this.setContentPane(new ListarDisciplinasByCurso());
     }//GEN-LAST:event_disciplinasPorCursoActionPerformed
 
+    private void gestaoDisciplinasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestaoDisciplinasActionPerformed
+        // TODO add your handling code here:
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setContentPane(new CadastrarDisciplinaEmCurso());
+    }//GEN-LAST:event_gestaoDisciplinasActionPerformed
+
     public static void addCursos(ArrayList<Curso> cursos) {
         if (! cursos.isEmpty()) {
             cursos.addAll(cursos);
@@ -173,11 +194,13 @@ public class Iniciar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem CadastrarCursos;
     private javax.swing.JMenuItem disciplinasPorCurso;
+    private javax.swing.JMenuItem gestaoDisciplinas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem verCursos;

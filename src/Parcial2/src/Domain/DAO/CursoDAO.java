@@ -47,7 +47,7 @@ public abstract class CursoDAO extends Banco {
                 String nome = resultSet.getObject(2).toString();
                 
                 System.out.println(id + " " + nome );
-                disciplinas.add(new Disciplina(id, nome));
+                disciplinas.add(new Disciplina(id, nome, curso));
             }
         } catch (SQLException e) {
             e.printStackTrace();
