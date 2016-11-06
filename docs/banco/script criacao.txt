@@ -1,57 +1,56 @@
-CREATE TABLE `Aluno` (
-	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	`Nome`	TEXT NOT NULL,
-	`Cpf`	TEXT NOT NULL,
-	`Endereco`	TEXT NOT NULL,
-	`Nascimento`	DATE NOT NULL,
-	`Curso`	INTEGER NOT NULL,
-	FOREIGN KEY(`Curso`) REFERENCES `Curso`(`id`)
-);
-
-CREATE TABLE `AlunoTurma` (
-	`Id`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	`Nota`	REAL,
-	`Aluno`	INTEGER NOT NULL,
-	`Turma`	INTEGER NOT NULL,
-	FOREIGN KEY(`Aluno`) REFERENCES `Aluno`(`id`),
-	FOREIGN KEY(`Turma`) REFERENCES `Turma`(`id`)
-);
 
 CREATE TABLE `Curso` (
 	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	`Nome`	TEXT NOT NULL,
-	`Titulacao`	TEXT NOT NULL,
-	`Periodos`	INTEGER NOT NULL
+	`nome`	TEXT NOT NULL,
+	`titulacao`	TEXT NOT NULL,
+	`periodos`	INTEGER NOT NULL
 );
 
 CREATE TABLE `Disciplina` (
 	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	`Nome`	TEXT NOT NULL,
-	`Curso`	INTEGER NOT NULL,
+	`nome`	TEXT NOT NULL,
+	`idCurso`	INTEGER NOT NULL,
 	FOREIGN KEY(`Curso`) REFERENCES `Curso`(`id`)
 );
 
-CREATE TABLE `DisciplinaTurma` (
-	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	`CargaHoraria`	REAL NOT NULL,
-	`Disciplina`	INTEGER NOT NULL,
-	`Turma`	INTEGER NOT NULL,
-	FOREIGN KEY(`Disciplina`) REFERENCES `Disciplina`(`id`),
-	FOREIGN KEY(`Turma`) REFERENCES `Turma`(`id`)
-);
 
 CREATE TABLE `Professor` (
 	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	`Nome`	TEXT NOT NULL,
-	`Cpf`	TEXT NOT NULL,
-	`Nascimento`	DATE NOT NULL
+	`nome`	TEXT NOT NULL,
+	`cpf`	TEXT NOT NULL,
+	`nascimento`	DATE NOT NULL
 );
 
 CREATE TABLE `Turma` (
 	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	`Professor`	INTEGER NOT NULL,
+	`idProfessor`	INTEGER NOT NULL,
 	FOREIGN KEY(`Professor`) REFERENCES `Professor`(`id`)
 );
 
+CREATE TABLE `DisciplinaTurma` (
+	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	`cargaHoraria`	REAL NOT NULL,
+	`idDisciplina`	INTEGER NOT NULL,
+	`idTurma`	INTEGER NOT NULL,
+	FOREIGN KEY(`Disciplina`) REFERENCES `Disciplina`(`id`),
+	FOREIGN KEY(`Turma`) REFERENCES `Turma`(`id`)
+);
 
+CREATE TABLE `Aluno` (
+	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	`nome`	TEXT NOT NULL,
+	`cpf`	TEXT NOT NULL,
+	`nascimento`	DATE NOT NULL,
+	`idCurso`	INTEGER NOT NULL,
+	FOREIGN KEY(`Curso`) REFERENCES `Curso`(`id`)
+);
+
+CREATE TABLE `AlunoTurma` (
+	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	`nota`	REAL,
+	`idAluno`	INTEGER NOT NULL,
+	`idTurma`	INTEGER NOT NULL,
+	FOREIGN KEY(`Aluno`) REFERENCES `Aluno`(`id`),
+	FOREIGN KEY(`Turma`) REFERENCES `Turma`(`id`)
+);
 

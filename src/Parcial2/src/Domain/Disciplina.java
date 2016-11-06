@@ -10,21 +10,25 @@ import java.util.ArrayList;
 public class Disciplina {
     private int id;
     private String nome;
-    private Professor professor;
     private ArrayList<Turma> turmas;
     
     public static final int COLUNAS = 3;
-    public static final String[] NOME_COLUNA = {"id", "nome", "professor"};
+    public static final String[] NOME_COLUNA = {"id", "nome"};
     
-    public Disciplina(int id, String nome, Professor professor) {
+    public Disciplina(int id, String nome) {
         this.id = id;
         this.nome = nome;
         turmas = new ArrayList<>();
     }
     
-    public Disciplina(String nome, Professor professor) {
+    public Disciplina(String nome) {
         this.nome = nome;
         turmas = new ArrayList<>();
+    }
+    
+    @Override
+    public String toString() {
+        return this.nome;
     }
 
     public void addTurma(Turma turma) {
@@ -54,14 +58,6 @@ public class Disciplina {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Professor getProfessor() {
-        return professor;
-    }
-
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
     }
 
     public ArrayList<Turma> getTurmas() {

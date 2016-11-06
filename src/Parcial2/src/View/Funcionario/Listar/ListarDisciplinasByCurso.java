@@ -3,9 +3,14 @@ package View.Funcionario.Listar;
 import Domain.Curso;
 import Domain.Disciplina;
 import Domain.Service.CursoService;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -18,21 +23,18 @@ public class ListarDisciplinasByCurso extends javax.swing.JPanel {
         cursosList.removeAll();
         
         ArrayList<Curso> cursos = CursoService.getAll();
-        for (Curso a : cursos) {
-            cursosList.addItem(a.getNome());
-        }
         
-        cursosList.addActionListener(new ActionListener() {
+        
+        
+        
+        disciplinasList.setModel(new DefaultTableModel(Disciplina.NOME_COLUNA, 0));
+        
+        cursosList.addListSelectionListener(new ListSelectionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                int id = e.getID();
-                Curso curso = CursoService.findCursoById(id);
-                if (curso != null){
-                    ArrayList<Disciplina> disciplinas = CursoService.getDisciplinas(curso);
-                    
-                }
+            public void valueChanged(ListSelectionEvent e) {
             }
         });
+        
     }
     
     private Object[][] getData(ArrayList<Disciplina> disciplinas) {
@@ -41,14 +43,12 @@ public class ListarDisciplinasByCurso extends javax.swing.JPanel {
         if (disciplinas.size() == 0) {
             rowData[0][0] = "vazio";
             rowData[0][1] = "vazio";
-            rowData[0][2] = "vazio";
             return rowData;
         }
         int row = 0;
         for (Disciplina a : disciplinas) {
             rowData[row][0] = a.getId();
             rowData[row][1] = a.getNome();
-            rowData[row][2] = a.getProfessor().getNome();
             row = 0;
         }
         return rowData;
@@ -58,16 +58,10 @@ public class ListarDisciplinasByCurso extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cursosList = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         disciplinasList = new javax.swing.JTable();
-
-        cursosList.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        cursosList.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cursosListActionPerformed(evt);
-            }
-        });
+        jScrollPane2 = new javax.swing.JScrollPane();
+        cursosList = new javax.swing.JList<>();
 
         disciplinasList.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         disciplinasList.setModel(new javax.swing.table.DefaultTableModel(
@@ -83,38 +77,39 @@ public class ListarDisciplinasByCurso extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(disciplinasList);
 
+        cursosList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(cursosList);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cursosList, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cursosList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cursosListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cursosListActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cursosListActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cursosList;
+    private javax.swing.JList<String> cursosList;
     private javax.swing.JTable disciplinasList;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

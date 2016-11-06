@@ -17,7 +17,7 @@ public abstract class Banco {
         try {
             Class.forName("org.sqlite.JDBC");
             // Deve ser alterado quando o banco versão final estiver pronto
-            conexao = DriverManager.getConnection("jdbc:sqlite:sqLite_test.db");
+            conexao = DriverManager.getConnection("jdbc:sqlite:BancoFaculdade.db");
             statement = conexao.createStatement();
             return true;
         } catch (ClassNotFoundException | SQLException e) {
@@ -56,8 +56,8 @@ public abstract class Banco {
     
     /**
      * Antes de executar qualquer select sql. <br>
-     * Deve-se executar o método conectar() e somente após terminar de pegar todos os dados deve-se utilizar o 
-     * método desconectar.
+     * Deve-se executar o método conectar() e somente após terminar de pegar todos os dados deve-se utilizar o método desconectar.
+     * Lembre-se ao inserir pesquisas com Strings deve-se concatenar o valor String entre aspas '' simples.
      */
     protected static ResultSet exec(String sql) {
         try {

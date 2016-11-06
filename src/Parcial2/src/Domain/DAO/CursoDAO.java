@@ -17,8 +17,8 @@ public abstract class CursoDAO extends Banco {
     
     public static Curso get(Curso curso) {
         // nome, disciplina, numeroPeriodo, titulacao
-        final String sql = "select c.id, c.nome, c.numeroDePeriodos, c.titulacao from curso c " +
-                           "where c.nome = " + curso.getNome() + "c.numeroDePeriodos = " + curso.getNumeroPeriodos() + "c.titulacao = " 
+        final String sql = "select c.id, c.nome, c.periodos, c.titulacao from curso c " +
+                           "where c.nome = " + curso.getNome() + "c.periodos = " + curso.getNumeroPeriodos() + "c.titulacao = " 
                           +curso.getTitulacao();
         
         try {
@@ -37,24 +37,16 @@ public abstract class CursoDAO extends Banco {
      * Este método retorna um ArrayList<'Disciplina>' as colunas id, nome das disciplinas e professor.
      */
     public static ArrayList<Disciplina> getAllDisciplinasByCurso(Curso curso) {
-        final String sql = "select d.id, d.nome d.idProfessor fom Disciplina d join CursoDisciplina cd on d.id=cd.idDisciplina "+
-                           "where cd.idCurso = " + curso.getId();
+        final String sql = "select d.id, d.nome fom Disciplina d where d.idCurso = " + curso.getId();
         ArrayList<Disciplina> disciplinas = new ArrayList<>();
         resultSet = exec(sql);
         try {
             while(resultSet.next()) {
-                int id = Integer.parseInt(resultSet.getObject(1).toString());
+                int id = resultSet.getInt(1);
                 String nome = resultSet.getObject(2).toString();
-                String sql2 = "select p.id, p. nome, p.dataNascimento, p.cpf "
-                            + "from DisciplinaProfessor df join Professor p on p.id=df.idProfessor  "
-                            + "where df.idDisciplina = " + resultSet.getString(1);
-                ResultSet resultSetP = exec(sql);
-                int idP = resultSetP.getInt(1);
-                String nomeP = resultSetP.getString(2);
-                Date dataP = new Date(resultSetP.getString(3));
-                String cpf = resultSetP.getString(4);
-                Professor professor =  new Professor(id, nomeP, dataP, cpf);
-                disciplinas.add(new Disciplina(id, nome, professor));
+                
+                System.out.println(id + " " + nome );
+                disciplinas.add(new Disciplina(id, nome));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,7 +70,7 @@ public abstract class CursoDAO extends Banco {
     public static ArrayList<Curso> getAll() {
         conectar();
         // id, nome, disciplinas, numeroPeriodos, titulacao
-        final String sql = "select c.id, c.nome, c.numeroDePeriodos, c.titulacao from curso c";
+        final String sql = "select c.id, c.nome, c.periodos, c.titulacao from curso c";
         ArrayList<Curso> cursos = new ArrayList<>();
         
         resultSet = exec(sql);
@@ -100,18 +92,19 @@ public abstract class CursoDAO extends Banco {
     public static Curso findById(int id) {
         conectar();
         // id, nome, periodos, titulacao
-        final String sql = "select c.codCurso, c.nome, c.numeroDePeriodos, c.titulacao from curso c where c.id = " + id;
+        final String sql = "select c.id, c.nome, c.periodos, c.titulacao from curso c where c.id = " + id;
+        System.out.println(id);
         Curso curso = null;
         
         resultSet = exec(sql);
         
         if (resultSet != null) {
             try {
-                curso = new Curso(
-                    Integer.parseInt(resultSet.getObject(1).toString()),
-                    resultSet.getObject(2).toString(),
-                    Integer.parseInt(resultSet.getObject(3).toString()),
-                    resultSet.getObject(4).toString());
+                int idCurso = resultSet.getInt(1);
+                String nome = resultSet.getString(2);
+                int periodos = resultSet.getInt(3);
+                String titulacao = resultSet.getString(4);
+                curso = new Curso (idCurso, nome, periodos, titulacao);
             } catch(SQLException e) {
                 e.printStackTrace();
             }
@@ -119,27 +112,26 @@ public abstract class CursoDAO extends Banco {
         desconectar();
         return curso;
     }
-    public static ArrayList<Curso> findByName(String name) {
+    public static Curso findByName(String name) {
         conectar();
-        final String sql = "select c.codCurso, c.nome, c.numeroDePeriodos, c.titulacao "
-                         + "from curso c where c.nome = " + name;
-        ArrayList<Curso> cursos = new ArrayList<>();
+        final String sql = "select c.id, c.nome, c.periodos, c.titulacao from curso c where c.nome = '" + name + "';";
+        Curso curso = null;
         
         resultSet = exec(sql);
         
         try {
-            while(resultSet.next()) {
-                int codigo = Integer.parseInt(resultSet.getObject(1).toString());
-                String nome = resultSet.getObject(2).toString();
-                int numeroPeriodos = Integer.parseInt(resultSet.getObject(3).toString());
-                String titulacao = resultSet.getObject(4).toString();
-                cursos.add(new Curso(codigo, nome, numeroPeriodos, titulacao));
+            if (resultSet != null) {
+                int idCurso = resultSet.getInt(1);
+                String nome = resultSet.getString(2);
+                int periodos = resultSet.getInt(3);
+                String titulacao = resultSet.getString(4);
+                curso = new Curso(idCurso, nome, periodos, titulacao);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         desconectar();
-        return cursos;
+        return curso;
     }
     public static boolean delete(Curso curso) {
         if(curso != null) {
@@ -158,7 +150,7 @@ public abstract class CursoDAO extends Banco {
         conectar();
         boolean result = false;
         if(curso != null) {
-            final String sql = "insert into Curso(nome, numeroDePeriodos, titulacao) " +
+            final String sql = "insert into Curso(nome, periodos, titulacao) " +
                                " values('" + curso.getNome()+"',"+curso.getNumeroPeriodos()+",'"+curso.getTitulacao()+"')";
             result = save(sql);
         }
