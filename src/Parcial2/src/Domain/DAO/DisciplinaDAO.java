@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public abstract class DisciplinaDAO extends Banco {
     
     public static Disciplina findById(int idDisciplina) {
-        final String sql = "select d.id, d.nome, d.idCurso from Disciplina d where d.id = " + idDisciplina;
+        final String sql = "select d.id, d.nome, d.idCurso, id.cargaHoraria from Disciplina d where d.id = " + idDisciplina;
         
         resultSet = exec(sql);
         try {
@@ -23,7 +23,8 @@ public abstract class DisciplinaDAO extends Banco {
                 int id = resultSet.getInt(1);
                 String nome = resultSet.getString(2);
                 Curso curso = CursoDAO.findById(resultSet.getInt(3));
-                return new Disciplina(id, nome, curso);
+                int cargaHoraria = resultSet.getInt(4);
+                return new Disciplina(id, nome, curso, cargaHoraria);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,5 +61,11 @@ public abstract class DisciplinaDAO extends Banco {
     public static boolean remTurma(int idDisciplina, int idTurma) {
         final String sql = "delete from DisciplinaTurma where idDisciplina = " + idDisciplina + " idTurma = " + idTurma;
         return delete(sql);
+    }
+    
+    public static boolean save(Disciplina disciplina) {
+        final String sql = "insert into Disciplina(nome, cargaHoraria, idCurso)"
+                        + "value("+disciplina.getNome()+","+disciplina.getCargaHoraria()+","+disciplina.get+")";
+        return false;
     }
 }

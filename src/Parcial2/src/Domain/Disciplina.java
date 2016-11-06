@@ -11,21 +11,24 @@ public class Disciplina {
     private int id;
     private String nome;
     private Curso curso;
+    private int cargaHoraria;
     private ArrayList<Turma> turmas;
     
     public static final int COLUNAS = 3;
-    public static final String[] NOME_COLUNA = {"id", "nome"};
+    public static final String[] NOME_COLUNA = {"id", "nome", "Carga Horária"};
     
-    public Disciplina(int id, String nome, Curso curso) {
+    public Disciplina(int id, String nome, Curso curso, int cargaHoraria) {
         this.id = id;
         this.nome = nome;
         this.curso = curso;
+        this.cargaHoraria = cargaHoraria;
         turmas = new ArrayList<>();
     }
     
-    public Disciplina(String nome, Curso curso) {
+    public Disciplina(String nome, Curso curso, int cargaHoraria) {
         this.nome = nome;
         this.curso = curso;
+        this.cargaHoraria = cargaHoraria;
         turmas = new ArrayList<>();
     }
     
@@ -70,5 +73,19 @@ public class Disciplina {
     public void setTurmas(ArrayList<Turma> turmas) {
         this.turmas.addAll(turmas);
     }
+    
+    public int getCargaHoraria() {
+        return this.cargaHoraria;
+    }
+    
+    public void setCargaHoraria(int cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
+    }
+    
+    public Curso getCurso() {
+        return this.curso;
+    }
+    
+    public void 
     
 }

@@ -8,7 +8,7 @@ import Domain.Turma;
  */
 public abstract class TurmaDAO extends Banco {
     public static Turma findById(int id) {
-        final String sql = "";
+        final String sql = "select t.id, t. from Turma t";
         return null;
     }
 }
