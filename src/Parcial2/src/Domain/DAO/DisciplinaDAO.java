@@ -69,6 +69,7 @@ public abstract class DisciplinaDAO extends Banco {
     
     
     public static boolean save(Disciplina disciplina) {
+        conectar();
         boolean result = false;
         if(disciplina != null) {
         final String sql = "insert into Disciplina(nome, cargaHoraria, idCurso)"
@@ -76,15 +77,18 @@ public abstract class DisciplinaDAO extends Banco {
         result = save(sql);
         }
         desconectar();
-        return false;
+        return result;
     }
     public static boolean delete(Disciplina disciplina) {
+        conectar();
+        boolean result = false;
         if(disciplina != null) {
             final String sql = "delete from Disciplina where id = " + disciplina.getId();
             disciplina = null;
-            return delete(sql);
+            result = delete(sql);
         }
-        return false;
+        desconectar();
+        return result;
     }
     public static ArrayList<Disciplina> getAll() {
         conectar();
