@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public abstract class CursoDAO extends Banco {
     
@@ -95,22 +96,20 @@ public abstract class CursoDAO extends Banco {
         conectar();
         // id, nome, periodos, titulacao
         final String sql = "select c.id, c.nome, c.periodos, c.titulacao from curso c where c.id = " + id;
-        System.out.println(id);
         Curso curso = null;
         
         resultSet = exec(sql);
-        
-        if (resultSet != null) {
-            try {
+        try {
+            if (resultSet != null) {
                 int idCurso = resultSet.getInt(1);
                 String nome = resultSet.getString(2);
                 int periodos = resultSet.getInt(3);
                 String titulacao = resultSet.getString(4);
                 curso = new Curso (idCurso, nome, periodos, titulacao);
-            } catch(SQLException e) {
+            } 
+        } catch(SQLException e) {
                 e.printStackTrace();
             }
-        }
         desconectar();
         return curso;
     }

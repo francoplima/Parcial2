@@ -4,7 +4,7 @@ import Domain.*;
 import Domain.Service.CursoService;
 import View.Funcionario.Cadastrar.CadastrarCurso;
 import View.Funcionario.Cadastrar.CadastrarDisciplinaEmCurso;
-import View.Funcionario.Cadastrar.GestaoTurma;
+import View.Funcionario.Cadastrar.GestaoTurma_1;
 import View.Funcionario.Listar.ListarCurso;
 import View.Funcionario.Listar.ListarDisciplinasByCurso;
 import java.util.ArrayList;
@@ -133,7 +133,7 @@ public class Iniciar extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,7 +174,7 @@ public class Iniciar extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setContentPane(new GestaoTurma());
+        this.setContentPane(new GestaoTurma_1());
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public static void addCursos(ArrayList<Curso> cursos) {

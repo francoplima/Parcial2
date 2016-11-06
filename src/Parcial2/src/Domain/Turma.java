@@ -26,6 +26,11 @@ public class Turma {
         this.alunos = new ArrayList<>();
     }
 
+    @Override
+    public String toString() {
+        return this.disciplina.getNome();
+    }
+    
     public int getId() {
         return id;
     }

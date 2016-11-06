@@ -1,10 +1,8 @@
 package Domain.DAO;
 
-import Domain.Aluno;
 import Domain.Curso;
 import static Domain.DAO.Banco.resultSet;
 import Domain.Disciplina;
-import Domain.Turma;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -15,23 +13,26 @@ import java.util.logging.Logger;
  * @author guilh
  */
 public abstract class DisciplinaDAO extends Banco {
-    
     public static Disciplina findById(int idDisciplina) {
-        final String sql = "select d.id, d.nome, d.idCurso, id.cargaHoraria from Disciplina d where d.id = " + idDisciplina;
+        conectar();
+        final String sql = "select d.id, d.nome, d.idCurso, d.cargaHoraria from Disciplina d where d.id = " + idDisciplina;
         
         resultSet = exec(sql);
+        
+        Disciplina disciplina = null;
         try {
-            while(resultSet.next()) {
+            if(resultSet != null) {
                 int id = resultSet.getInt(1);
                 String nome = resultSet.getString(2);
                 Curso curso = CursoDAO.findById(resultSet.getInt(3));
                 int cargaHoraria = resultSet.getInt(4);
-                return new Disciplina(id, nome, curso, cargaHoraria);
+                disciplina = new Disciplina(id, nome, curso, cargaHoraria);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        desconectar();
+        return disciplina;
     }
     
     public static Disciplina findByName(String name) {
@@ -93,7 +94,8 @@ public abstract class DisciplinaDAO extends Banco {
     public static ArrayList<Disciplina> getAll() {
         conectar();
         // id, nome, disciplinas, numeroPeriodos, titulacao
-        final String sql = "select d.id, d.nome, d.idCurso, d.cargaHoraria from Disciplina d";
+        final String sql = "select d.id, d.nome, c.nome, d.cargaHoraria from Disciplina d join Curso c "
+                         + "on c.id = d.idCurso";
         ArrayList<Disciplina> disciplinas = new ArrayList<>();
         
         resultSet = exec(sql);

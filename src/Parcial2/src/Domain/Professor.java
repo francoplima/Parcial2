@@ -24,4 +24,10 @@ public class Professor extends Pessoa {
         matricula = new Matricula(id);
     }
     
+    public int getId() {
+        return matricula.getId();
+    }
+    public void setId(int id) {
+        this.matricula.setId(id);
+    }
 }

@@ -7,6 +7,7 @@ package Domain.DAO;
 
 import Domain.Professor;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -22,6 +23,7 @@ public abstract class ProfessorDAO extends Banco {
         resultSet = exec(sql);
         Professor professor = null;
         try {
+            resultSet.next();
             if (resultSet != null) {
                 int idProf = resultSet.getInt(1);
                 String nome = resultSet.getString(2);
@@ -35,5 +37,25 @@ public abstract class ProfessorDAO extends Banco {
         
         desconectar();
         return professor;
+    }
+    public static ArrayList<Professor> getAll() {
+        conectar();
+        final String sql = "select p.id, p.nome, p.cpf, p.nascimento from Professor p;";
+        resultSet = exec(sql);
+        ArrayList<Professor> professores = new ArrayList<>();
+        try {
+            while(resultSet.next()) {
+                int id = resultSet.getInt(1);
+                String nome = resultSet.getString(2);
+                String cpf = resultSet.getString(3);
+                Date data = resultSet.getDate(4);
+                professores.add(new Professor(id, nome, data, cpf));
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        
+        desconectar();
+        return professores;
     }
 }
