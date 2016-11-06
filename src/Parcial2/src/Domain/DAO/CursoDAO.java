@@ -38,16 +38,16 @@ public abstract class CursoDAO extends Banco {
      */
     public static ArrayList<Disciplina> getAllDisciplinasByCurso(Curso curso) {
         conectar();
-        final String sql = "select d.id, d.nome from Disciplina d where d.idCurso = " + curso.getId();
+        final String sql = "select d.id, d.nome, d.cargaHoraria from Disciplina d where d.idCurso = " + curso.getId();
         ArrayList<Disciplina> disciplinas = new ArrayList<>();
         resultSet = exec(sql);
         try {
             while(resultSet.next()) {
                 int id = resultSet.getInt(1);
                 String nome = resultSet.getObject(2).toString();
-                
+                int cargaHoraria = resultSet.getInt(3);
                 System.out.println(id + " " + nome );
-                disciplinas.add(new Disciplina(id, nome, curso));
+                disciplinas.add(new Disciplina(id, nome, curso, cargaHoraria));
             }
         } catch (SQLException e) {
             e.printStackTrace();

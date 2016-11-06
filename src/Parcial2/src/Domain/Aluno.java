@@ -9,14 +9,8 @@ import java.util.Date;
  */
 public class Aluno extends Pessoa{
     private Matricula matricula;
-    private Curso curso;
+    private Curso curso;    
     
-    /*
-    protected String nome;
-    protected Date dataNascimento;
-    protected String endereco;
-    protected String telefone;
-    */
     
     /**
      * Construtor de Aluno, para dataNascimento deve-se passar no formato dd-MM-yyy.
@@ -35,5 +29,13 @@ public class Aluno extends Pessoa{
     
     public int getId() {
         return matricula.getId();
+    }
+    
+    public Curso getCurso() {
+        return this.curso;
+    }
+    
+    public void setCurso() {
+        this.curso = curso;
     }
 }

@@ -4,6 +4,7 @@ import Domain.*;
 import Domain.Service.CursoService;
 import View.Funcionario.Cadastrar.CadastrarCurso;
 import View.Funcionario.Cadastrar.CadastrarDisciplinaEmCurso;
+import View.Funcionario.Cadastrar.GestaoTurma;
 import View.Funcionario.Listar.ListarCurso;
 import View.Funcionario.Listar.ListarDisciplinasByCurso;
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ public class Iniciar extends javax.swing.JFrame {
         disciplinasPorCurso = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         gestaoDisciplinas = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -105,6 +108,18 @@ public class Iniciar extends javax.swing.JFrame {
 
         jMenu3.add(jMenu5);
 
+        jMenu6.setText("Turmas");
+
+        jMenuItem1.setText("Gestão de Turmas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem1);
+
+        jMenu3.add(jMenu6);
+
         jMenu1.add(jMenu3);
 
         jMenuBar1.add(jMenu1);
@@ -156,6 +171,12 @@ public class Iniciar extends javax.swing.JFrame {
         this.setContentPane(new CadastrarDisciplinaEmCurso());
     }//GEN-LAST:event_gestaoDisciplinasActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setContentPane(new GestaoTurma());
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     public static void addCursos(ArrayList<Curso> cursos) {
         if (! cursos.isEmpty()) {
             cursos.addAll(cursos);
@@ -201,7 +222,9 @@ public class Iniciar extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem verCursos;
     // End of variables declaration//GEN-END:variables

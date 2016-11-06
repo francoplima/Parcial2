@@ -85,7 +85,4 @@ public class Disciplina {
     public Curso getCurso() {
         return this.curso;
     }
-    
-    public void 
-    
 }
