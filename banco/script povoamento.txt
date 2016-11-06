@@ -1,0 +1,36 @@
+insert into Curso (Nome, Titulacao, Periodos)
+values ("Ciencias da COmputacao","Bacharelado",8),
+       ("Engenharia Eletrica","Bacharelado",10),
+       ("Fisica","Licenciatura",10),
+       ("Matematica","Licenciatura",8),
+       ("Robotica","pos graduacao",4);
+
+insert into Aluno (Nome, Cpf, Endereco, Nascimento, Curso)
+values ("Sofia Barros Correia","150.483.126-86","Quadra 305 Norte Rua 38, 1851 Palmas-TO cep:77001-353",1983-02-05,1),
+       ("Antônio Santos Melo","867.346.693-86","Largo São Benedito, 385 Franca-SP cep:14405-199",1983-01-21,2),
+       ("Evelyn Cavalcanti Goncalves","687.936.891-36","Av. Professora Elvira de Moura Bastos, 225 Pindamonhangaba-SP cep:12412-400",1989-08-11,3),
+       ("Miguel Rocha Pinto","809.082.515-05","Rua José Lins Teles, 1777 Cabo de Santo Agostinho-PE cep:54510-280",1990-06-16,4),
+       ("Leonardo Silva Almeida","226.776.497-05","Rua Luís de Oliveira Arruda, 1984 Jundiaí-SP cep:13203-627",1976-11-19,5);
+
+insert into Professor (Nome, Cpf, Nascimento)
+values ("Vitória Cardoso Barbosa","678.782.243-07",1974-12-28),
+       ("Kauã Cavalcanti Fernandes","247.514.163-83",1957-05-23),
+       ("Isabella Oliveira Castro","709.122.842-18",1957-10-07),
+       ("Luis Pinto Santos","728.615.924-00",1987-02-28),
+       ("Estevan Correia Araujo","469.485.712-63",1964-03-26);
+
+insert into Disciplina (Nome, Curso)
+values ("Calculo 1",2),
+       ("POO",1),
+       ("termodinamica",3),
+       ("PLC",4),
+       ("Processadores",5);
+
+insert into Turma (Professor)
+values (2),(4),(3),(5),(1);
+
+insert into AlunoTurma (Aluno, Turma)
+values (4,1),(1,3),(3,5),(2,2),(5,4);
+
+insert into DisciplinaTurma (CargaHoraria, Disciplina, Turma)
+values (80,1,5),(60,2,4),(80,3,3),(100,4,2),(80,5,1);
