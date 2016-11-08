@@ -58,4 +58,19 @@ public abstract class ProfessorDAO extends Banco {
         desconectar();
         return professores;
     }
+    public static boolean addProfessor(String nome, String cpf, String nascimento ) {
+        conectar();
+        final String sql = "insert into Professor (nome, cpf, nascimento) "
+                         + "values(" + nome + ", " + cpf +", " + nascimento + ")";
+        desconectar();
+        return save(sql);
+    }
+    //creio que remoção basta o ip como parâmetro
+    public static boolean remProfessor (int id) {
+        conectar();
+        final String sql = "delete from Professor where id = " + id;
+        desconectar();
+        return delete(sql);
+    }
 }
+
