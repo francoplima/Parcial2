@@ -8,21 +8,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public abstract class Banco {
-<<<<<<< HEAD
-    protected Connection conexao;
-    protected Statement statement;
-    protected PreparedStatement prepStatement;
-    protected ResultSet resultSet;
-    
-    protected boolean conectar() {
-=======
     protected static Connection conexao;
     protected static Statement statement;
     protected static PreparedStatement prepStatement;
     protected static ResultSet resultSet;
     
     protected static boolean conectar() {
->>>>>>> Franco
         try {
             Class.forName("org.sqlite.JDBC");
             // Deve ser alterado quando o banco versão final estiver pronto
@@ -35,11 +26,7 @@ public abstract class Banco {
         }
         return false;
     }
-<<<<<<< HEAD
-    protected boolean desconectar() {
-=======
     protected static boolean desconectar() {
->>>>>>> Franco
         try {
             conexao.close();
             return true;
@@ -48,11 +35,14 @@ public abstract class Banco {
             return false;
         }
     }
-<<<<<<< HEAD
-    protected boolean delete(String sql) {
-=======
+    
+    /**
+     * O método delete deve ser usado para deletar dados do banco.
+     */
     protected static boolean delete(String sql) {
->>>>>>> Franco
+        if (!sql.contains("delete")) {
+            return false;
+        }
         conectar();
         boolean result = false;
         try {
@@ -63,33 +53,33 @@ public abstract class Banco {
         desconectar();
         return result;
     }
-<<<<<<< HEAD
-    protected ResultSet exec(String sql) {
-=======
+    
+    /**
+     * Antes de executar qualquer select sql. <br>
+     * Deve-se executar o método conectar() e somente após terminar de pegar todos os dados deve-se utilizar o 
+     * método desconectar.
+     */
     protected static ResultSet exec(String sql) {
->>>>>>> Franco
         try {
-            conexao.setAutoCommit(true);
-            return statement.executeQuery(sql);
+            resultSet = statement.executeQuery(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return resultSet;
     }
-<<<<<<< HEAD
-=======
+    
+    /**
+     * O método save deve ser usado para inserir instruções no banco.
+     */
     protected static boolean save(String sql) {
-        conectar();
-        boolean result = false;
+        if (!sql.contains("insert")) {
+            return false;
+        }
         try {
-            result = statement.execute(sql);
+            return statement.execute(sql);
         } catch(SQLException e) {
             e.printStackTrace();
-        } finally {
-            desconectar();
-            return result;
         }
-        
+        return false;        
     }
->>>>>>> Franco
 }

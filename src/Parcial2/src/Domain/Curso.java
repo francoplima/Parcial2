@@ -1,65 +1,36 @@
-<<<<<<< HEAD
-package Domain.Service;
-
-//import Geral.Disciplina;
-import java.util.List;
-
-public class Curso {
-    private int codigo;
-    private String nome;
-    //private List<Disciplina> disciplinas;
-    private int numeroPeriodos;
-    private String titulacao;
-    
-    public Curso(int codigo, String nome, int numeroPeriodos, String titulacao) {
-        this.codigo = codigo;
-=======
 package Domain;
 
 //import Geral.Disciplina;
-import Domain.Disciplina;
-import java.util.List;
+import Domain.Service.CursoService;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class Curso {
     private int id;
     private String nome;
-    private List<Disciplina> disciplinas;
+    private ArrayList<Disciplina> disciplinas;
     private int numeroPeriodos;
     private String titulacao;
     
     public Curso(int id, String nome, int numeroPeriodos, String titulacao) {
         this.id = id;
->>>>>>> Franco
         this.nome = nome;
         this.numeroPeriodos = numeroPeriodos;
         this.titulacao = titulacao;
     }
     public Curso(String nome, int numeroPeriodos, String titulacao) {
-<<<<<<< HEAD
-        this.codigo = codigo;
-=======
         this.id = id;
->>>>>>> Franco
         this.nome = nome;
         this.numeroPeriodos = numeroPeriodos;
         this.titulacao = titulacao;
     }
 
-<<<<<<< HEAD
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-=======
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
->>>>>>> Franco
     }
 
     public String getNome() {
@@ -70,13 +41,27 @@ public class Curso {
         this.nome = nome;
     }
 
-    /*public List<Disciplina> getDisciplinas() {
+    public ArrayList<Disciplina> getDisciplinas() {
         return disciplinas;
     }
-
-    public void setDisciplinas(List<Disciplina> disciplinas) {
-        this.disciplinas = disciplinas;
-    }*/
+    
+    public void remDisciplina(Disciplina disciplina) {
+        if (CursoService.remDisciplina(this, disciplina)) {
+            this.disciplinas.remove(disciplina);
+        } else {
+            JOptionPane.showMessageDialog(null, "Não foi possível remover a disciplina, tente novamente mais tarde",
+                                          "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void addDisciplinas(Disciplina disciplina) {
+        if (CursoService.remDisciplina(this, disciplina)) {
+            this.disciplinas.add(disciplina);
+        } else {
+            JOptionPane.showMessageDialog(null, "Não foi possível adicionar a disciplina, tente novamente mais tarde",
+                                          "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     public int getNumeroPeriodos() {
         return numeroPeriodos;

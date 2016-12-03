@@ -12,11 +12,10 @@ import java.util.List;
 public class Matricula {
     private int id;
     private List<Disciplina> disciplinas;
-    private Date dataMatricula;
     
-    public Matricula(Date dataMatricula) {
+    public Matricula(int id) {
+        this.id = id;
         disciplinas = new ArrayList<>();
-        this.dataMatricula = dataMatricula;
     }
 
     public int getId() {
@@ -33,14 +32,6 @@ public class Matricula {
 
     public void setDisciplinas(List<Disciplina> disciplinas) {
         this.disciplinas = disciplinas;
-    }
-
-    public Date getDataMatricula() {
-        return dataMatricula;
-    }
-
-    public void setDataMatricula(Date dataMatricula) {
-        this.dataMatricula = dataMatricula;
     }
     
 }

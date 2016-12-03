@@ -1,5 +1,9 @@
 package Service;
 
+<<<<<<< HEAD
+import java.text.ParseException;
+=======
+>>>>>>> Franco
 import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -37,7 +41,11 @@ public class PadronizadorServiceTest {
      * Test of dataPadrao method, of class PadronizadorService.
      */
     @Test
+<<<<<<< HEAD
+    public void testDataPadrao() throws ParseException {
+=======
     public void testDataPadrao() {
+>>>>>>> Franco
         System.out.println("dataPadrao");
         int dia = 10;
         int mes = 13;

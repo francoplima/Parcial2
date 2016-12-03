@@ -1,6 +1,6 @@
 package View.Funcionario.Listar;
 
-import Domain.Service.Curso;
+import Domain.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -23,16 +23,17 @@ public class ListarCurso extends javax.swing.JPanel {
         Object[][] rowData = null;
         if (! cursos.isEmpty()) {
             rowData = new Object[cursos.size()][columnRows.length];
-            int col = 0;
-            for (int pos = 0; pos <cursos.size(); pos++) {
-                rowData[pos][col] = cursos.get(pos).getCodigo();
+            int col = 0, pos = 0;
+            for (Curso a : cursos) {
+                rowData[pos][col] = a.getId();
                 col++;
-                rowData[pos][col] = cursos.get(pos).getNome();
+                rowData[pos][col] = a.getNome();
                 col++;
-                rowData[pos][col] = cursos.get(pos).getNumeroPeriodos();
+                rowData[pos][col] = a.getNumeroPeriodos();
                 col++;
-                rowData[pos][col] = cursos.get(pos).getTitulacao();
+                rowData[pos][col] = a.getTitulacao();
                 col=0;
+                pos++;
             }
         }
         jTable1.setModel(new DefaultTableModel(rowData, columnRows));
